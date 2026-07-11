@@ -106,13 +106,26 @@ SAMPLE_WEATHER = {
     "london": {"celsius": 15, "conditions": "light rain"},
 }
 
+SAMPLE_WEATHER_FAHREINHEIT = {
+    "tokyo": {"fahrenheit": 72, "conditions": "partly cloudy"},   # 22°C → 71.6°F ≈ 72°F
+    "delhi": {"fahrenheit": 93, "conditions": "clear skies"},     # 34°C → 93.2°F ≈ 93°F
+    "london": {"fahrenheit": 59, "conditions": "light rain"},     # 15°C → 59°F
+}
 
-def get_weather(city: str) -> str:
+def get_weather(city: str, fahreinheit=False) -> str:
     """The tool itself -- a plain function with no knowledge of AI at all.
     Uses sample data rather than a live API so the demo never depends on
     classroom internet.
     """
+    if fahreinheit:
+        print('Finding fahreinheit conditions')
+        data = SAMPLE_WEATHER_FAHREINHEIT.get(city.lower())
+        if data is None:
+            return f"No weather data for {city!r}."
+        return f"{city.title()}: {data['fahrenheit']}F, {data['conditions']}"
+
     data = SAMPLE_WEATHER.get(city.lower())
+    print('finding celsius conditions')
     if data is None:
         return f"No weather data for {city!r}."
     return f"{city.title()}: {data['celsius']}C, {data['conditions']}"
@@ -128,8 +141,9 @@ def answer_weather_question(user_message: str) -> str:
     # extracted is of Type WeatherQuestion
     if not isinstance(extracted, WeatherQuestion):
         return f"Could not extract a city: {extracted}"
-    return get_weather(extracted.city)
+    return get_weather(extracted.city,extracted.wants_fahrenheit)
 
 
 if __name__ == "__main__":
     print(answer_weather_question("What's the weather like in Tokyo right now?"))
+    print(answer_weather_question("Is it warm in Delhi today? I want it in Fahrenheit please."))
