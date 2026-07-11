@@ -89,6 +89,7 @@ def run_agent(messages: list, max_turns: int = 4) -> str:
             messages.append({"role": "assistant", "content": message.content})
             return message.content
 
+        call = message.tool_calls[0]
         messages.append(
             {
                 "role": "assistant",
