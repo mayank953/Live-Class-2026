@@ -18,6 +18,7 @@ load_dotenv()
 def ask_openai(question: str) -> str:
     from openai import OpenAI
 
+    print(f'[ask_openai] with question={question}')
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
     response = client.chat.completions.create(
         model="gpt-4o-mini", max_tokens=200, messages=[{"role": "user", "content": question}]
@@ -28,6 +29,7 @@ def ask_openai(question: str) -> str:
 def ask_anthropic(question: str) -> str:
     from anthropic import Anthropic
 
+    print(f'[ask_anthropic] with question={question}')
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     response = client.messages.create(
         model="claude-3-5-haiku-20241022", max_tokens=200, messages=[{"role": "user", "content": question}]
@@ -38,6 +40,7 @@ def ask_anthropic(question: str) -> str:
 def ask_groq(question: str) -> str:
     from openai import OpenAI
 
+    print(f'[ask_groq] with question={question}')
     client = OpenAI(api_key=os.environ["GROQ_API_KEY"], base_url="https://api.groq.com/openai/v1")
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile", max_tokens=200, messages=[{"role": "user", "content": question}]
@@ -50,6 +53,7 @@ def ask_groq(question: str) -> str:
 def ask_openrouter(question: str) -> str:
     from openai import OpenAI
 
+    print(f'[ask_openrouter] with question={question}')
     client = OpenAI(api_key=os.environ["OPENROUTER_API_KEY"], base_url="https://openrouter.ai/api/v1")
     response = client.chat.completions.create(
         model="openrouter/free", max_tokens=200, messages=[{"role": "user", "content": question}]
@@ -106,13 +110,26 @@ SAMPLE_WEATHER = {
     "london": {"celsius": 15, "conditions": "light rain"},
 }
 
+SAMPLE_WEATHER_FAHREINHEIT = {
+    "tokyo": {"fahrenheit": 72, "conditions": "partly cloudy"},   # 22°C → 71.6°F ≈ 72°F
+    "delhi": {"fahrenheit": 93, "conditions": "clear skies"},     # 34°C → 93.2°F ≈ 93°F
+    "london": {"fahrenheit": 59, "conditions": "light rain"},     # 15°C → 59°F
+}
 
-def get_weather(city: str) -> str:
+def get_weather(city: str, fahreinheit=False) -> str:
     """The tool itself -- a plain function with no knowledge of AI at all.
     Uses sample data rather than a live API so the demo never depends on
     classroom internet.
     """
+    if fahreinheit:
+        print('Finding fahreinheit conditions')
+        data = SAMPLE_WEATHER_FAHREINHEIT.get(city.lower())
+        if data is None:
+            return f"No weather data for {city!r}."
+        return f"{city.title()}: {data['fahrenheit']}F, {data['conditions']}"
+
     data = SAMPLE_WEATHER.get(city.lower())
+    print('finding celsius conditions')
     if data is None:
         return f"No weather data for {city!r}."
     return f"{city.title()}: {data['celsius']}C, {data['conditions']}"
@@ -128,8 +145,9 @@ def answer_weather_question(user_message: str) -> str:
     # extracted is of Type WeatherQuestion
     if not isinstance(extracted, WeatherQuestion):
         return f"Could not extract a city: {extracted}"
-    return get_weather(extracted.city)
+    return get_weather(extracted.city,extracted.wants_fahrenheit)
 
 
 if __name__ == "__main__":
     print(answer_weather_question("What's the weather like in Tokyo right now?"))
+    print(answer_weather_question("Is it warm in Delhi today? I want it in Fahrenheit please."))
