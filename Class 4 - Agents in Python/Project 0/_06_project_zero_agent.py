@@ -88,7 +88,8 @@ def run_agent(messages: list, max_turns: int = 4) -> str:
         if not message.tool_calls:
             messages.append({"role": "assistant", "content": message.content})
             return message.content
-
+        # missing call variable added
+        call = message.tool_calls[0]
         messages.append(
             {
                 "role": "assistant",
