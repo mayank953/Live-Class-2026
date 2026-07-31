@@ -1,0 +1,45 @@
+[
+  {
+    "role": "user",
+    "content": "Hi I am Mayank"
+  },
+  {
+    "role": "assistant",
+    "content": "It's nice to meet you, Mayank. Is there something I can help you with or would you like to chat?"
+  },
+  {
+    "role": "user",
+    "content": "who am I ?"
+  },
+  {
+    "role": "assistant",
+    "content": "You are Mayank, the person I'm currently chatting with. If you'd like to know more about yourself or need help with something specific, feel free to ask!"
+  },
+  {
+    "role": "user",
+    "content": "What is the weather in Tokyo"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "9x47zy7j9",
+        "type": "function",
+        "function": {
+          "name": "get_weather",
+          "arguments": "{\"city\":\"Tokyo\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "9x47zy7j9",
+    "content": "Tokyo: 22C, partly cloudy"
+  },
+  {
+    "role": "assistant",
+    "content": "The current weather in Tokyo is partly cloudy with a temperature of 22 degrees Celsius."
+  }
+]

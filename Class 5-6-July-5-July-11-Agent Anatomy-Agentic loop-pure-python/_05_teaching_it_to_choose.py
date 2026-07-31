@@ -40,11 +40,27 @@ get_weather_schema = {
         "name": "get_weather",
         "description": "Get the current weather for a city. Use this whenever "
                         "the user asks about weather, temperature, or conditions "
-                        "in a specific place.",
+                        "in a specific place. Don't use it for AQI"
+                        },
         "parameters": {
             "type": "object",
             "properties": {
                 "city": {"type": "string", "description": "The city name, e.g. 'Tokyo'."}
+            }
+                            },
+}
+
+get_air_quality_schema = {
+    "type": "function",
+    "function": {
+        "name": "get_air_quality",
+        "description": "Get the current air quality for a city. Use this whenever "
+                        "the user asks about air quality, pollution, or AQI "
+                        "in a specific place.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "city": {"type": "string", "description": "The city name, e.g. 'Delhi'."}
             },
             "required": ["city"],
         },
@@ -66,6 +82,65 @@ get_calculator_schema = {
         },
     },
 }
+get_complete_weather_schema = {
+    "type": "function",
+    "function": {
+        "name": "get_weather",
+        "description": "Get the current weather for a city. Use this whenever "
+                        "the user asks about weather, temperature, or conditions "
+                        "in a specific place.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "city": {"type": "string", "description": "The city name, e.g. 'Tokyo'."}
+            },
+            "required": ["city"],
+        },
+    },
+}
+
+get_capital_schema = {
+    "type": "function",
+    "function": {
+        "name": "get_capital",
+        "description": "Get the capital city of a country. Use this whenever "
+                        "the user asks about the capital of a specific country.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "country": {"type": "string", "description": "The country name, e.g. 'France'."}
+            },
+            "required": ["country"],
+        },
+    },
+}
+
+
+def get_tool_information(tool_name):
+    return get_tool_schemas().get(tool_name)
+
+get_tool_schemas = lambda: {
+    "get_weather": get_complete_weather_schema,
+    "get_air_quality": get_air_quality_schema,
+    "calculator": get_calculator_schema,
+    "get_capital": get_capital_schema,
+}
+
+get_tool_schema_for_llm={
+    "type": "function",
+    "function": {
+        "name": "get_tool_schema_for_llm",
+        "description": "Get the schema of a tool by its name. Use this whenever " 
+                        "the user asks for the schema of a specific tool.",     
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "tool_name": {"type": "string", "description": "The name of the tool, e.g. 'get_weather'."}
+            },
+            "required": ["tool_name"],
+        },
+    },
+}
 
 
 
@@ -77,6 +152,7 @@ def get_client_and_model():
     from openai import OpenAI
 
     if os.environ.get("GROQ_API_KEY"):
+        print("Using Groq API...")
         return (
             OpenAI(api_key=os.environ["GROQ_API_KEY"], base_url="https://api.groq.com/openai/v1"),
             "llama-3.3-70b-versatile",
@@ -87,6 +163,7 @@ def get_client_and_model():
             "openrouter/free",
         )
     if os.environ.get("OPENAI_API_KEY"):
+        print("Using OpenAI API...")
         return OpenAI(api_key=os.environ["OPENAI_API_KEY"]), "gpt-4o-mini"
 
     raise RuntimeError(
@@ -100,18 +177,21 @@ def ask_ai_to_choose(question: str):
     contain a tool_calls list instead of plain text -- that list is the
     model's decision, not an executed result.
     """
+
     client, model = get_client_and_model()
     response = client.chat.completions.create(
         model=model,
         max_tokens=300,
         messages=[{"role": "user", "content": question}],
-        tools=[get_weather_schema, get_calculator_schema],
+        tools=[get_weather_schema,get_capital_schema, get_tool_schema_for_llm],
     )
+
+
     return response.choices[0].message
 
 
 if __name__ == "__main__": 
-    question = "what is 1 usd in INR?"
+    question =  "what is the Weather in Tokyo? "
     message = ask_ai_to_choose(question)
 
     print(f"Model's raw reply: {message!r}")
@@ -131,20 +211,46 @@ if __name__ == "__main__":
 
 
 '''
-Hi How are you
+Hi How are you ?
 
 Model's raw reply: ChatCompletionMessage(content="I'm just a computer program, so I don't have feelings, but I'm here and ready to help you! How can I assist you today?", refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=None)
 
 
 what is the weather like in Tokyo right now?
 
-Model's raw reply: ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=[ChatCompletionMessageToolCall(id='call_x4l82uTQXd3UR6Nw4Nq8wy48', function=Function(arguments='{"city":"Tokyo"}', name='get_weather'), type='function')])
+Model's raw reply: ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=
+[ChatCompletionMessageToolCall(id='call_x4l82uTQXd3UR6Nw4Nq8wy48', function=Function(arguments='{"city":"Tokyo"}', name='get_weather'), type='function')]
 
-What is 2 times 2
+
+)
+
+What is 2 times 2?
 
 Model's raw reply: ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=[ChatCompletionMessageToolCall(id='call_xOvtjwScctaVoFq3YIX8cwvn', function=Function(arguments='{"expression":"2 * 2"}', name='calculator'), type='function')])
 
+What is the capital of Japan?
+
+Model's raw reply: ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=[ChatCompletionMessageToolCall(id='nf9wkeb1q', function=Function(arguments='{"country":"Japan"}', name='get_capital'), type='function'),
+ChatCompletionMessageToolCall(id='nf9wkeb3q', function=Function(arguments='{"country":"Tokyo"}', name='get_capital'), type='function'),
+ChatCompletionMessageToolCall(id='nf9w4eb1q', function=Function(arguments='{"country":"Delhi"}', name='get_capital'), type='function')])
 
 '''
+'''
+
+ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=
+[ChatCompletionMessageToolCall(id='call_x4l82uTQXd3UR6Nw4Nq8wy48', function=Function(arguments='{"city":"Delhi"}', name='get_weather'), type='function')]
+
+call_x4l82uTQXd3UR6Nw4Nq8wy48 - wrong weather API key
+
+ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=
+[ChatCompletionMessageToolCall(id='call_x4l82uTQXd3UR6Nw4Nq8wy49', function=Function(arguments='{"city":"Delhi"}', name='get_weather'), type='function')]
 
 
+call_x4l82uTQXd3UR6Nw4Nq8wy49 - wrong weather API key
+
+ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=
+[ChatCompletionMessageToolCall(id='call_x4l82uTQXd3UR6Nw4Nq8wy50', function=Function(arguments='{"city":"Delhi"}', name='get_weather'), type='function')]
+
+
+
+'''
