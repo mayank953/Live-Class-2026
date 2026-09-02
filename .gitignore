@@ -24,9 +24,11 @@ __pycache__/
 
 # Pre-restructure local scaffolding — superseded by the dated Weekend NN folders,
 # kept on disk locally but never tracked (only stray .venv/.env content lives in these)
-/Class 1 Python AI/
+/class2v2/
 /Class 4 & 5 and 6.5  - Agents in Python/
 /Class 6  - Langchain Starts/
 /Class 7 - Langchain/
+/Class 8 - Langchain - Structured Output & Tools/
 /class 9 - Langchain Agents + Project/
 /class2v2/
+
