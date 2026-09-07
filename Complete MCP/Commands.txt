@@ -1,0 +1,7 @@
+# install uv if you don't have it
+curl -LsSf https://astral.sh/uv/install.sh | sh        # macOS/Linux
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"   # Windows
+
+# set up the project
+uv init mcp-warmup && cd mcp-warmup
+uv add fastmcp

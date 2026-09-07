@@ -1,0 +1,19 @@
+https://ai-automation-with-mayank.netlify.app/#mcp
+
+
+
+"Why do I even need MCP for my own small project?" 
+
+"You might not, yet. One app, a handful of tools, nobody else reusing them? Plain function calling  is genuinely fine — MCP starts paying for itself once more than one app or more than one team needs the same tool."
+
+"Is MCP an Anthropic product I have to pay for?" 
+
+"No. It's a free, open specification, now governed by a multi-company foundation, not one company's paid product."
+
+
+"Function calling already solved my problem in — why do I need to learn MCP at all?" 
+
+"Because single problem crack only shows up once you scale past one app and one tool — which happens faster than most teams expect. Learning MCP now means you don't have to relearn your integration approach later."
+
+"Couldn't a company just build one great function-calling library instead of a whole protocol?" 
+"That's basically what MCP is — except the key word is 'agreed.' A library only works if everyone adopts that one company's library. A protocol is a shared agreement multiple companies co-govern, which is why OpenAI and Google support MCP even though Anthropic built it first."
