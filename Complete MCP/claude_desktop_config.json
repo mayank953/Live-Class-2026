@@ -1,0 +1,138 @@
+{
+  "mcpServers": {
+    "demo-filesystem-wiretapped": {
+      "command": "python3",
+      "args": [
+        "/Users/mayank/Complete MCP/mcp_wiretap.py",
+        "--log",
+        "/Users/mayank/Complete MCP/wiretap-live.log",
+        "--",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/mayank/Complete MCP"
+      ],
+      "env": {},
+      "transport": "stdio",
+      "type": null,
+      "cwd": null,
+      "timeout": null,
+      "keep_alive": null,
+      "description": null,
+      "icon": null,
+      "authentication": null
+    },
+    "RecipeBox_Updated": {
+      "command": "/opt/homebrew/bin/uv",
+      "args": [
+        "run",
+        "--with",
+        "fastmcp",
+        "fastmcp",
+        "run",
+        "/Users/mayank/Complete MCP/first-mcp-server/recipebox_fastmcp.py"
+      ],
+      "env": {},
+      "transport": "stdio",
+      "type": null,
+      "cwd": null,
+      "timeout": null,
+      "keep_alive": null,
+      "description": null,
+      "icon": null,
+      "authentication": null
+    }
+  },
+  "coworkUserFilesPath": "/Users/mayank/Documents/Claude",
+  "preferences": {
+    "chromeExtensionEnabled": false,
+    "chromeExtension": {
+      "pairedDeviceId": "cd12a603-5520-4f47-ae8a-9d7084bd0f63",
+      "pairedDeviceName": "Browser 2",
+      "pairedFromDeviceIds": [
+        "c76a24f9-3929-45bd-80a5-7a645dccd289",
+        "cd12a603-5520-4f47-ae8a-9d7084bd0f63"
+      ]
+    },
+    "coworkBrowserToolsEnabled": true,
+    "coworkPreferredBrowser": "built_in",
+    "launchPreviewPersistedWorkspaces": [],
+    "launchPreviewSessionScopedSessions": [],
+    "launchPreviewAllowedOrigins": [
+      "https://21st.dev"
+    ],
+    "localAgentModeTrustedFolders": [
+      "/Users/mayank/Desktop/Cowork",
+      "/Users/mayank/Desktop/Claude Cowork Repo",
+      "/Users/mayank/Desktop/Claude-Cowork-Environment"
+    ],
+    "remoteSessionFolderGrants": {
+      "session_012xJeSymqg2SfStG5ru92uM": [
+        "/Users/mayank/Complete MCP"
+      ]
+    },
+    "coworkLegacyRootGrantsPruned": true,
+    "allowAllBrowserActions": true,
+    "coworkScheduledTasksEnabled": true,
+    "coworkHipaaRestricted": false,
+    "orgWorkAcrossAppsDisabled": false,
+    "ccdScheduledTasksEnabled": true,
+    "hybridDetectLatched": true,
+    "sidebarMode": "chat",
+    "bypassPermissionsGateByAccount": {
+      "8a945779-3bff-43e5-b683-32d87ddeb625": false,
+      "64878061-70ff-4009-977b-a87316d53aef": false
+    },
+    "coworkWebSearchEnabled": true,
+    "coworkModelAutoFallbackByAccount": {
+      "8a945779-3bff-43e5-b683-32d87ddeb625": true,
+      "64878061-70ff-4009-977b-a87316d53aef": true
+    },
+    "keepAwakeEnabled": true,
+    "coworkOnboardingResumeStep": null,
+    "chicagoEnabled": true,
+    "remoteToolsDeviceName": "mayanks-macbook-pro-local",
+    "chicagoUserDeniedBundleIds": [
+      "net.whatsapp.WhatsApp",
+      "com.vivaldi.Vivaldi"
+    ],
+    "epitaxyPrefs": {
+      "starred-local-code-sessions": [
+        "local_84e6dbbc-a92d-429a-83c5-bdea893b9e24",
+        "local_c59d2700-59ad-42b2-ba0e-38af03965c13"
+      ],
+      "starred-cowork-spaces": [],
+      "starred-session-groups": [],
+      "dframe-local-slice": {
+        "pinnedOrder": [],
+        "homeProjectsPinnedOrder": []
+      },
+      "ccd-sessions-filter": {
+        "state": {
+          "selectedProjects": []
+        },
+        "version": 0
+      },
+      "desktop-frame.paneStore.v1": {
+        "state": {
+          "extraPanesByMode": {},
+          "colWeightsByMode": {},
+          "rowSplit": 0.5,
+          "draftNonce": 0
+        },
+        "version": 4
+      },
+      "ccd-effort-level": "low",
+      "dframe-group-scopes": {},
+      "epitaxy-auto-default-notice-seen.8a945779-3bff-43e5-b683-32d87ddeb625": true,
+      "epitaxy-folder-permission-mode.8a945779-3bff-43e5-b683-32d87ddeb625": {
+        "/Users/mayank/Desktop/Website Creation": "acceptEdits",
+        "/Users/mayank/Github Repos/Agentic 3.0/Live-Class-2026": "auto"
+      },
+      "epitaxy-transcript-links-in-preview": false,
+      "epitaxy-transcript-links-chooser-seen": true,
+      "epitaxy-auto-entry-warning-seen.8a945779-3bff-43e5-b683-32d87ddeb625": true,
+      "epitaxy-auto-mode-denial-count.8a945779-3bff-43e5-b683-32d87ddeb625": 1
+    }
+  }
+}

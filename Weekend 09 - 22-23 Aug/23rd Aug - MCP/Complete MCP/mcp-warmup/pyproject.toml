@@ -1,0 +1,19 @@
+[project]
+name = "mcp-warmup"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Mayank Aggarwal", email = "31075014+mayank953@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=3.4.7",
+]
+
+[project.scripts]
+mcp-warmup = "mcp_warmup:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"

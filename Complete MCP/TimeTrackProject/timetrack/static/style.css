@@ -1,0 +1,53 @@
+:root {
+  --ink: #1c2430; --sub: #64748b; --line: #e2e8f0; --bg: #f8fafc;
+  --accent: #2563eb; --accent-bg: #eff6ff; --success: #16a34a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--ink);
+}
+header { background: #fff; border-bottom: 1px solid var(--line); padding: 20px 32px; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo {
+  width: 42px; height: 42px; border-radius: 8px; background: var(--accent);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 15px;
+}
+header h1 { margin: 0; font-size: 20px; }
+.tagline { margin: 2px 0 0; color: var(--sub); font-size: 13px; }
+
+.tabs {
+  display: flex; gap: 4px; padding: 0 32px; background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.tab {
+  padding: 12px 16px; border: none; background: none; cursor: pointer;
+  font-size: 14px; font-weight: 600; color: var(--sub);
+  border-bottom: 2.5px solid transparent;
+}
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+main { max-width: 900px; margin: 0 auto; padding: 28px 32px; }
+.view { display: none; }
+.view.active { display: block; }
+
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+th, td { padding: 12px 14px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--line); }
+th { background: #f1f5f9; font-size: 12px; text-transform: uppercase; color: var(--sub); letter-spacing: 0.03em; }
+
+.summary-controls { display: flex; gap: 10px; margin-bottom: 20px; }
+.summary-controls select, .summary-controls button, #logForm input, #logForm button {
+  padding: 9px 12px; border: 1px solid var(--line); border-radius: 6px; font-size: 14px;
+}
+.summary-controls button, #logForm button {
+  background: var(--accent); color: #fff; border: none; font-weight: 600; cursor: pointer;
+}
+
+#summaryResult { background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+#summaryResult .total { font-size: 28px; font-weight: 700; color: var(--accent); }
+#summaryResult .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+
+#logForm { display: flex; gap: 10px; flex-wrap: wrap; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+
+footer { text-align: center; padding: 20px; color: var(--sub); font-size: 12px; }

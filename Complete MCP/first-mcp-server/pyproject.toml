@@ -1,0 +1,10 @@
+[project]
+name = "first-mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=4.0.3",
+    "mcp>=2.2.0",
+]

@@ -1,0 +1,14 @@
+[{
+    "name":"list_notes",
+
+"description":"List all notes from Apple Notes app",
+
+
+"inputSchema":
+{"type":"object","properties":
+
+{"folder":{"type":"string","description":"Optional folder name to filter notes (e.g., 'Notes', 'Recently Deleted')"}
+
+
+
+,"limit":{"type":"number","description":"Maximum number of notes to return (default: 20)","default":20}}}}

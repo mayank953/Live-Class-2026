@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TimeTrack</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">TT</div>
+      <div>
+        <h1>TimeTrack</h1>
+        <p class="tagline">Time entries logged here, or by an AI assistant, land in the same place.</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-view="entries">All Entries</button>
+    <button class="tab" data-view="summary">Project Summary</button>
+    <button class="tab" data-view="log">Log Time</button>
+  </nav>
+
+  <main>
+    <section id="view-entries" class="view active">
+      <table id="entriesTable">
+        <thead>
+          <tr><th>Date</th><th>Employee</th><th>Project</th><th>Hours</th><th>Description</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="view-summary" class="view">
+      <div class="summary-controls">
+        <select id="projectSelect"></select>
+        <button id="loadSummaryBtn">Load Summary</button>
+      </div>
+      <div id="summaryResult"></div>
+    </section>
+
+    <section id="view-log" class="view">
+      <form id="logForm">
+        <input id="employeeInput" type="text" placeholder="Employee name" required>
+        <input id="projectInput" type="text" placeholder="Project" required>
+        <input id="dateInput" type="date" required>
+        <input id="hoursInput" type="number" step="0.25" placeholder="Hours" required>
+        <input id="descInput" type="text" placeholder="Description">
+        <button type="submit">Log Time</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Same database, two front doors -- this page, and any MCP-connected AI assistant.</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
