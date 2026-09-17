@@ -128,3 +128,6 @@ def serve_index():
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/mcp", mcp_app)
+
+
+# uv run uvicorn main:app --reload

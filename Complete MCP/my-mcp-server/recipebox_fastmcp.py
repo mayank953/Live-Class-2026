@@ -44,8 +44,30 @@ def search_recipes(tag: str) -> list[dict]:
     return result
 
 
+# resources 
+VALID_TAGS=["quick", "vegetarian", "sunday", "meat", "vegan"]
+
+@mcp.resource("recipe://tags")
+def get_valid_tags() -> list[str]:
+    """Get the list of valid tags for recipes."""
+    logger.info("Resource call: get_valid_tags")
+    result = VALID_TAGS
+    logger.info("Resource result: get_valid_tags -> %s", result)
+    return result
+
+@mcp.prompt("recipe://search")
+def search_prompt(tag: str) -> str:
+    """Prompt for searching recipes by tag."""
+    logger.info("Prompt call: search_prompt with tag=%s", tag)
+    result = f"Searching for recipes with tag '{tag}'..."
+    logger.info("Prompt result: search_prompt -> %s", result)
+    return result
+
+
 if __name__ == "__main__":
     logger.info("Starting RecipeBox MCP server")
     mcp.run()
 
     # CLIENT_PORT=8080 npx @modelcontextprotocol/inspector python3 recipebox_fastmcp.py
+    
+    # uv run fastmcp install claude-desktop recipebox_fastmcp.py

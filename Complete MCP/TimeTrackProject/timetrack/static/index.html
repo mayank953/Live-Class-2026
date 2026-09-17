@@ -7,53 +7,101 @@
 </head>
 <body>
   <header>
-    <div class="brand">
-      <div class="logo">TT</div>
-      <div>
-        <h1>TimeTrack</h1>
-        <p class="tagline">Time entries logged here, or by an AI assistant, land in the same place.</p>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo">TT</div>
+        <div>
+          <p class="eyebrow">WORKSPACE</p>
+          <h1>TimeTrack</h1>
+          <p class="tagline">One clear view of every hour, from every workflow.</p>
+        </div>
       </div>
+      <div class="header-badge"><span></span> Live workspace</div>
     </div>
   </header>
 
-  <nav class="tabs">
-    <button class="tab active" data-view="entries">All Entries</button>
-    <button class="tab" data-view="summary">Project Summary</button>
-    <button class="tab" data-view="log">Log Time</button>
-  </nav>
+  <div class="nav-shell">
+    <nav class="tabs">
+      <button class="tab active" data-view="entries"><span class="tab-icon">▤</span> All Entries</button>
+      <button class="tab" data-view="summary"><span class="tab-icon">◔</span> Project Summary</button>
+      <button class="tab" data-view="log"><span class="tab-icon">＋</span> Log Time</button>
+    </nav>
+  </div>
 
   <main>
     <section id="view-entries" class="view active">
-      <table id="entriesTable">
-        <thead>
-          <tr><th>Date</th><th>Employee</th><th>Project</th><th>Hours</th><th>Description</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ACTIVITY</p>
+          <h2>All time entries</h2>
+          <p class="section-copy">A complete record of work logged across your projects.</p>
+        </div>
+        <div class="section-chip">Recent activity</div>
+      </div>
+      <div class="table-card">
+        <div class="table-scroll">
+          <table id="entriesTable">
+            <thead>
+              <tr><th>Date</th><th>Employee</th><th>Project</th><th>Hours</th><th>Description</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <section id="view-summary" class="view">
-      <div class="summary-controls">
-        <select id="projectSelect"></select>
-        <button id="loadSummaryBtn">Load Summary</button>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">INSIGHTS</p>
+          <h2>Project summary</h2>
+          <p class="section-copy">See how your team’s time is distributed by project.</p>
+        </div>
       </div>
-      <div id="summaryResult"></div>
+      <div class="panel summary-panel">
+        <div class="summary-controls">
+          <label for="projectSelect">Choose a project</label>
+          <div class="control-row">
+            <select id="projectSelect"></select>
+            <button id="loadSummaryBtn">View summary <span>→</span></button>
+          </div>
+        </div>
+        <div id="summaryResult">
+          <div class="empty-state">
+            <div class="empty-icon">◔</div>
+            <strong>Select a project to get started</strong>
+            <span>Your team breakdown will appear here.</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="view-log" class="view">
-      <form id="logForm">
-        <input id="employeeInput" type="text" placeholder="Employee name" required>
-        <input id="projectInput" type="text" placeholder="Project" required>
-        <input id="dateInput" type="date" required>
-        <input id="hoursInput" type="number" step="0.25" placeholder="Hours" required>
-        <input id="descInput" type="text" placeholder="Description">
-        <button type="submit">Log Time</button>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">NEW ENTRY</p>
+          <h2>Log your time</h2>
+          <p class="section-copy">Capture the details while they’re still fresh.</p>
+        </div>
+      </div>
+      <form id="logForm" class="panel">
+        <div class="form-grid">
+          <label>Employee name<input id="employeeInput" type="text" placeholder="e.g. Alex Morgan" required></label>
+          <label>Project<input id="projectInput" type="text" placeholder="e.g. Website redesign" required></label>
+          <label>Date<input id="dateInput" type="date" required></label>
+          <label>Hours<input id="hoursInput" type="number" step="0.25" min="0" placeholder="0.00" required></label>
+          <label class="full-width">Description <span class="optional">Optional</span><input id="descInput" type="text" placeholder="What did you work on?"></label>
+        </div>
+        <div class="form-actions">
+          <span class="form-hint">Entries are shared with your connected AI assistant.</span>
+          <button type="submit">Save time entry <span>→</span></button>
+        </div>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>Same database, two front doors -- this page, and any MCP-connected AI assistant.</p>
+    <p><span>✦</span> Same database, two front doors — this page and any MCP-connected AI assistant.</p>
   </footer>
 
   <script src="/static/app.js"></script>
